@@ -1,0 +1,96 @@
+.delivery-form {
+  padding: 20px 16px;
+  background: #fff;
+  border-radius: 12px;
+}
+.input-wrapper {
+  background: #f6f6f9;
+  border-radius: 8px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  margin-bottom: 16px;
+}
+.form-country {
+  background-color: #f6f6f9;
+  width: 100%;
+  padding: 0 16px 0 16px;
+}
+.select-title {
+  margin-left: 16px;
+  color: #94a3b8;
+}
+.input-title {
+  margin-left: 16px;
+}
+.weight-input {
+  width: 100%;
+  background-color: #f6f6f9;
+  padding-left: 16px;
+}
+.range {
+  margin-bottom: 16px;
+}
+.slider-weight {
+  display: flex;
+  justify-content: space-between;
+}
+.slider-text {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  color: #94a3b8;
+}
+.accent-color {
+  color: #94a3b8;
+}
+.input-range {
+  width: 100%;
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  width: 100%;
+  height: 3px;
+  background: #e2e8f0;
+  outline: none;
+  cursor: pointer;
+}
+.total-price-title {
+  color: #475569;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.total-price-value {
+  font-size: 32px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 16px;
+}
+.total-price-text {
+  color: #94a3b8;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+.price-presets-btn {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 130%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid #94a3b8;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background-color: #fff;
+}
+.price-presets-btn:nth-child(2) {
+  margin-right: 6px;
+}
+.price-presets-btn:nth-child(3) {
+  margin-right: 0px;
+}
+.price-presets-btn:active {
+  border: 1px solid #da291c;
+  color: #da291c;
+}
