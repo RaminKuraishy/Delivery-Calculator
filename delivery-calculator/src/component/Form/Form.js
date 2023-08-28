@@ -1,6 +1,19 @@
 import "./Form.scss";
 import Select from "react-select";
-function Form() {
+import action from "../../store/action";
+import { observer } from "mobx-react-lite";
+import { useEffect, useState } from "react";
+const Form = observer(() => {
+  useEffect(() => {
+    fetch(
+      "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&valcode=usd"
+    )
+      .then(res => res.json())
+      .then(data => {
+        action.rate = data[0].rate;
+      });
+  }, []);
+
   const options = [
     {
       value: "France",
@@ -15,6 +28,20 @@ function Form() {
       label: "Німеччина",
     },
   ];
+  // const [value, setValue] = useState();
+  const setCountry = e => {
+    action.setCountry(e.value);
+  };
+  const changeWeight = e => {
+    e.target.value = e.target.value.replace(",", ".");
+    e.target.value = e.target.value.replace(/[^1-9\.]+/, "");
+    const buttons = document.querySelectorAll(".price-presets-btn");
+    buttons.forEach(btn => {
+      btn.classList.remove("active-color");
+    });
+    // setValue(e.target.value);
+    action.setWeight(e.target.value);
+  };
   const selectStyles = {
     control: styles => ({
       ...styles,
@@ -39,53 +66,49 @@ function Form() {
       "&:hover": { color: "#da291c" },
     }),
   };
-  const rangeSlide = value => {
-    const weight = document.querySelector(".weight-input");
-    const range = document.querySelector(".input-range");
-    weight.addEventListener("input", e => {
-      range.value = e.target.value * 10;
-    });
-    range.addEventListener("input", e => {
-      updateWeight(e.target.value);
-      // console.log(e.target.value);
-    });
 
-    const updateWeight = currWeight => {
-      currWeight = currWeight / 10;
-      weight.value = currWeight;
-    };
+  const rangeSlide = e => {
+    // const range = document.querySelector(".input-range");
+    // const weight = document.querySelector(".weight-input");
+    action.setWeight((parseInt(e.target.value) / 10).toString());
+    // const updateWeight = currWeight => {
+    //   currWeight = currWeight / 10;
+    //   weight.value = currWeight;
+    // };
+    // updateWeight(e.target.value);
   };
+
   const getPriceBtn = event => {
     if (event.target.tagName === "BUTTON") {
+      action.setWeight(event.target.dataset["weight"]);
       const buttons = document.querySelectorAll(".price-presets-btn");
-      buttons.forEach(i => {
-        buttons.forEach(btn => {
-          btn.classList.remove("active-color");
-        });
-        event.target.classList.add("active-color");
+      buttons.forEach(btn => {
+        btn.classList.remove("active-color");
       });
+      event.target.classList.add("active-color");
     }
   };
-
   return (
     <form action="#" className="delivery-form">
       <div className="input-wrapper">
         <h2 className="select-title">Країна відправки</h2>
         <Select
           options={options}
-          defaultValue={{
-            value: "Poland",
-            label: "Польща",
-          }}
+          defaultValue={options[1]}
           styles={selectStyles}
           onFocus={false}
+          onChange={setCountry}
         />
       </div>
       <div className="input-wrapper">
         <h2 className="input-title">
           Вага <span className="accent-color">(кг)</span>
         </h2>
-        <input className="weight-input" defaultValue="0.5" type="text" />
+        <input
+          className="weight-input"
+          value={action.weight}
+          onChange={changeWeight}
+        />
       </div>
       <div className="range">
         <div className="slider-weight">
@@ -98,9 +121,10 @@ function Form() {
             type="range"
             min="5"
             max="300"
-            defaultValue="5"
+            // defaultValue="5"
             step="5"
-            onChange={() => rangeSlide()}
+            value={action.weight * 10}
+            onChange={rangeSlide}
           ></input>
         </div>
       </div>
@@ -109,7 +133,9 @@ function Form() {
         <h2 className="total-price-title">
           Приблизна вартість доставки (гривня)
         </h2>
-        <p className="total-price-value">292₴</p>
+        <p className="total-price-value">{action.price}</p>
+        {/* <p className="total-price-value">state: {value}</p> */}
+
         <p className="total-price-text">
           Дізнайся орієнтовну вартість доставки, вказавши основні дані про своє
           відправлення. Зверни увагу, що при сумарній вартості товарів понад 150
@@ -118,15 +144,29 @@ function Form() {
         </p>
       </div>
       <div onClick={getPriceBtn} className="price-presets">
-        <button className="price-presets-btn">Кросівки</button>
-        <button className="price-presets-btn">Футболка</button>
-        <button className="price-presets-btn">Сукня</button>
-        <button className="price-presets-btn">Куртка осіння</button>
-        <button className="price-presets-btn">Рушник</button>
-        <button className="price-presets-btn">Блейзер</button>
-        <button className="price-presets-btn">Рюкзак</button>
+        <button className="price-presets-btn" data-weight="1.5">
+          Кросівки
+        </button>
+        <button className="price-presets-btn" data-weight="0.4">
+          Футболка
+        </button>
+        <button className="price-presets-btn" data-weight="0.7">
+          Сукня
+        </button>
+        <button className="price-presets-btn" data-weight="2.3">
+          Куртка осіння
+        </button>
+        <button className="price-presets-btn" data-weight="0.8">
+          Рушник
+        </button>
+        <button className="price-presets-btn" data-weight="1.1">
+          Блейзер
+        </button>
+        <button className="price-presets-btn" data-weight="1.6">
+          Рюкзак
+        </button>
       </div>
     </form>
   );
-}
+});
 export default Form;
