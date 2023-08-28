@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/https//RaminKuraishy.github.io/Delivery-Calculator/static/css/main.16eeec04.css",
+    "main.js": "/https//RaminKuraishy.github.io/Delivery-Calculator/static/js/main.3833cb80.js",
+    "index.html": "/https//RaminKuraishy.github.io/Delivery-Calculator/index.html",
+    "main.16eeec04.css.map": "/https//RaminKuraishy.github.io/Delivery-Calculator/static/css/main.16eeec04.css.map",
+    "main.3833cb80.js.map": "/https//RaminKuraishy.github.io/Delivery-Calculator/static/js/main.3833cb80.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.16eeec04.css",
+    "static/js/main.3833cb80.js"
+  ]
+}
