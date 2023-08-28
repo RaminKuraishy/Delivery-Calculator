@@ -1,7 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
 class Action {
-  // totalPrice = "";
   multiplier = 10;
   weight = "0.5";
   rate = 1;
@@ -19,7 +18,7 @@ class Action {
   setWeight(n) {
     const roundNum = num => {
       const remainder = num - Math.floor(num / 10) * 10;
-      if (remainder == 0) {
+      if (remainder === 0) {
         return num;
       } else if (remainder > 5) {
         return Math.ceil(num / 10) * 10;
@@ -33,9 +32,6 @@ class Action {
     if (n.match(/\.\d+/) !== null) {
       result = roundNum(parseFloat(n) * 10) / 10;
     }
-    // if (result === "0") {
-    //   result = 0.5;
-    // }
     if (parseFloat(result) > 30) {
       result = 30;
     }
@@ -50,13 +46,8 @@ class Action {
         Math.round(
           (parseFloat(this.weight) * 8 * this.multiplier * this.rate) / 10
         ) || "-"
-      ).toString() + " UAH"
+      ).toString() + " ₴"
     );
-  }
-
-  updateWeight(currWeight) {
-    // currWeight = currWeight / 10;
-    // this.totalWeight = currWeight;
   }
 }
 

@@ -2,7 +2,7 @@ import "./Form.scss";
 import Select from "react-select";
 import action from "../../store/action";
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 const Form = observer(() => {
   useEffect(() => {
     fetch(
@@ -28,7 +28,6 @@ const Form = observer(() => {
       label: "Німеччина",
     },
   ];
-  // const [value, setValue] = useState();
   const setCountry = e => {
     action.setCountry(e.value);
   };
@@ -39,7 +38,6 @@ const Form = observer(() => {
     buttons.forEach(btn => {
       btn.classList.remove("active-color");
     });
-    // setValue(e.target.value);
     action.setWeight(e.target.value);
   };
   const selectStyles = {
@@ -68,14 +66,11 @@ const Form = observer(() => {
   };
 
   const rangeSlide = e => {
-    // const range = document.querySelector(".input-range");
-    // const weight = document.querySelector(".weight-input");
     action.setWeight((parseInt(e.target.value) / 10).toString());
-    // const updateWeight = currWeight => {
-    //   currWeight = currWeight / 10;
-    //   weight.value = currWeight;
-    // };
-    // updateWeight(e.target.value);
+    const buttons = document.querySelectorAll(".price-presets-btn");
+    buttons.forEach(btn => {
+      btn.classList.remove("active-color");
+    });
   };
 
   const getPriceBtn = event => {
@@ -121,7 +116,6 @@ const Form = observer(() => {
             type="range"
             min="5"
             max="300"
-            // defaultValue="5"
             step="5"
             value={action.weight * 10}
             onChange={rangeSlide}
@@ -134,7 +128,6 @@ const Form = observer(() => {
           Приблизна вартість доставки (гривня)
         </h2>
         <p className="total-price-value">{action.price}</p>
-        {/* <p className="total-price-value">state: {value}</p> */}
 
         <p className="total-price-text">
           Дізнайся орієнтовну вартість доставки, вказавши основні дані про своє
