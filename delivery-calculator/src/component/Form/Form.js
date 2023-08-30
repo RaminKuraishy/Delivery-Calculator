@@ -33,7 +33,7 @@ const Form = observer(() => {
   };
   const changeWeight = e => {
     e.target.value = e.target.value.replace(",", ".");
-    e.target.value = e.target.value.replace(/[^1-9\.]+/, "");
+    e.target.value = e.target.value.replace(/[^0-9\.]+/, "");
     const buttons = document.querySelectorAll(".price-presets-btn");
     buttons.forEach(btn => {
       btn.classList.remove("active-color");
