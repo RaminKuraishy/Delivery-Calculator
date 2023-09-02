@@ -99,45 +99,23 @@
   color: $orange-color;
 }
 input[type="range"] {
-  // -webkit-appearance: none;
-  // appearance: none;
   width: 100%;
-  // cursor: pointer;
-  // outline: none;
-  // height: 5px;
-  // overflow: hidden;
   -webkit-appearance: none;
-  // width: 20px;
   height: 3px;
   background: red;
-  // border-radius: 50%;
-  background: #E2E8F0;
-  // border: 1px solid #664AFF;
+  background: #e2e8f0;
   cursor: pointer;
 }
 
-// input[type="range"]::-webkit-slider-runnable-track {
-//   // height: 3px;
-//   background: $light-color;
-// }
-
 input[type="range"]::-webkit-slider-thumb {
-  // -webkit-appearance: none;
-  // // appearance: none;/
-  // height: 20px;
-  // width: 20px;
-  // background: $black-color;
-  // border-radius: 50%;
-  // box-shadow: -400px 0 0 400px $orange-color;
   -webkit-appearance: none;
   width: 32px;
   height: 32px;
   background: $white-color;
   border-radius: 50%;
-  // background: #664AFF;
   border: 4px solid $orange-color;
   cursor: pointer;
 }
-input::-moz-range-progress{
-  background: $orange-color; //this progress background is only shown on Firefox
+input::-moz-range-progress {
+  background: $orange-color;
 }
